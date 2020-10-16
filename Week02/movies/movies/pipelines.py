@@ -6,6 +6,7 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import pandas as pd
 import pymysql.cursors
+from .Mysql_info import mysql_info
 
 class MoviesPipeline:
     def process_item(self, item, spider):
@@ -23,12 +24,7 @@ class MoviesPipeline:
 
 
         # pymysql操作mysql方式保存数据
-        connection = pymysql.connect( host='localhost',
-                port=3306,
-                user='root',
-                password='Sunhk123$',
-                database='movies',
-                charset='utf8mb4',
+        connection = pymysql.connect( **mysql_info,
                 cursorclass=pymysql.cursors.DictCursor)
 
         try :
